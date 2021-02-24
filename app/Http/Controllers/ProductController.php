@@ -13,8 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = DB::table('categories')->get();
-        return view('catalog', ['categories' => $products]);
+        $products = DB::table('products')->get();
+        return view('catalog', ['products' => $products]);
     }
 
     /**
