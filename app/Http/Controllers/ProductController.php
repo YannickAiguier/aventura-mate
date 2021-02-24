@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Display a listing of all the products
      */
     public function index()
     {
-        //
+        $categories = DB::table('categories')->get();
+        return view('catalog', ['categories' => $categories]);
     }
 
     /**
