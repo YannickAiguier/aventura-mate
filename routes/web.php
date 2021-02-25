@@ -18,4 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/product/{id}', [ProductController::class, 'show']);
+
+// route vers l'affichage du catalogue, URI = /catalog
+Route::get('/catalog', [ProductController::class, 'index']);
+
