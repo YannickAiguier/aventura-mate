@@ -11,5 +11,4 @@
 @yield('content')
 <footer>Mon footer</footer>
 </body>
-
 </html>
