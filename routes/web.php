@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
 
+use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,13 +14,9 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [HomeController::class, 'HomeShowcontroller']);
 
 Route::get('/product/{id}', [ProductController::class, 'show']);
 
 // route vers l'affichage du catalogue, URI = /catalog
 Route::get('/catalog', [ProductController::class, 'index']);
-
