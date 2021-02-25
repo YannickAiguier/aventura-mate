@@ -39,14 +39,15 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified product according to its id in the URI
      *
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(int $id)
     {
-        //
+        $featuresProduct = Product::findOrFail($id);
+        return view('product', ['product' => $featuresProduct ]);
     }
 
     /**
