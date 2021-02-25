@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function HomeShowcontroller () {
-        $product = product::find(1);
+    public function HomeShowcontroller()
+    {
+        $product = Product::take(3)->get();
+        return view('home', ['product' => $product]);
+    }
 }
-}
+//$product = product::find(1);
+//return view('home', ['product' => $product]);
