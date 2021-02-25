@@ -15,9 +15,9 @@ use \App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'HomeShowcontroller']);
+Route::get('/', [HomeController::class, 'HomeShowcontroller'])->name('home');
 
-Route::get('/product/{id}', [ProductController::class, 'show']);
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product');
 
 // route vers l'affichage du catalogue, URI = /catalog
-Route::get('/catalog', [ProductController::class, 'index']);
+Route::get('/catalog', [ProductController::class, 'index'])->name('catalog');
