@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function HomeShowcontroller()
+    public function homeShowController()
     {
+        CartController::initCart();
         $products = Product::take(3)->get();
         return view('home', ['products' => $products]);
     }
