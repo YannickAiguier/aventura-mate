@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,8 +14,26 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = DB::table('products')->get();
-        return view('catalog', ['products' => $products]);
+        $products = Product::all();
+        $categories = Category::all();
+        return view('catalog', [
+            'products' => $products,
+            'categories' => $categories
+        ]);
+    }
+
+    //appel de la vue catalogue de produits filtrés par catégorie
+    public function indexByCategory (int $categoryId)
+    {
+        $products = Product::where('categories_id', $categoryId)->get();
+        $category = Category::findOrFail($categoryId);
+        $categories = Category::all();
+        return view('catalog', [
+            'products' => $products,
+            'category' => $category,
+            'categories' => $categories
+        ]);
+
     }
 
     /**
@@ -47,7 +66,7 @@ class ProductController extends Controller
     public function show(int $id)
     {
         $featuresProduct = Product::findOrFail($id);
-        return view('product', ['product' => $featuresProduct ]);
+        return view('product', ['product' => $featuresProduct]);
     }
 
     /**
