@@ -14,11 +14,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public static function calculatorVAT($id)
+    public function getPriceVatAttribute()
     {
-        $fetchProduct = Product::find($id);
-        $PriceWithVat=(round(($fetchProduct['price']+($fetchProduct['price']*$fetchProduct['vat'])/100)/100,2));
-
-        return $PriceWithVat;
+        return round(($this->price + ($this->price * $this->vat) / 100) / 100, 2);
     }
 }

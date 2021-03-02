@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class CartController extends Controller
 {
@@ -18,6 +19,7 @@ class CartController extends Controller
         }*/
         session()->get('cart', []);
     }
+
     /**
      * Return total products and price of the cart
      *
@@ -26,9 +28,9 @@ class CartController extends Controller
     {
         $total = 0;
         $nbProducts = 0;
-        foreach (session('cart') as $id => $quantity)
-        {
-            $total += ($quantity * Product::calculatorVAT($id));
+        foreach (session('cart') as $id => $quantity) {
+            $product = Product::findOrFail($id);
+            $total += ($quantity * $product->price_vat);
             $nbProducts += $nbProducts + $quantity;
         }
 
@@ -39,16 +41,21 @@ class CartController extends Controller
      * ajoute au panier un produit (id) et sa quantité (nb)
      *
      */
-    public static function addToCart($fid, $fnb)
+    public function addToCart(Request $request)
     {
         $tab = session('cart');
-        if (array_key_exists($fid, $tab))
-        {
-            $tab[$fid] += $fnb;
-        } else {
+        $fid = $request->input('id');
+        $fnb = $request->input('nb');
+
+        if (empty($tab) || !array_key_exists($fid, $tab)) {
             $tab[$fid] = $fnb;
+
+        } else {
+            $tab[$fid] += $fnb;
+
         }
         session(['cart' => $tab]);
+        return view('viewCart');
     }
 
     /**
@@ -74,7 +81,7 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -85,7 +92,7 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -96,7 +103,7 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -107,8 +114,8 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -119,7 +126,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

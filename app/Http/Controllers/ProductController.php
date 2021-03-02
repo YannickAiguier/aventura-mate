@@ -63,7 +63,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public static function show(int $id)
     {
         $featuresProduct = Product::findOrFail($id);
         return view('product', ['product' => $featuresProduct]);
