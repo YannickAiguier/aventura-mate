@@ -28,7 +28,13 @@ Route::get('/catalog', [ProductController::class, 'index'])->name('catalog');
 Route::get('/catalog/{categoryId}', [ProductController::class, 'indexByCategory'])->name('catalogByCategory');
 
 // route vers l'affichage du panier, URI = /cart
-Route::view('/cart', 'cart')->name('viewCart');
+Route::get('/cart', [CartController::class, 'index'])->name('indexCart');
+
+// route vers l'ajout au panier, URI = /cart
+Route::post('cart', [CartController::class, 'store'])->name('storeCart');
 
 // route vers la modification du panier, URI = /cart
 Route::put('/cart', [CartController::class, 'update'])->name('updateCart');
+
+// route vers la suppresion d'un produit du panier, URI = /cart
+Route::delete('cart/{id}', [CartController::class, 'destroy'])->name('destroyCart');
