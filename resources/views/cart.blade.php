@@ -21,5 +21,4 @@
     @endforeach
 
     <button type="submit" name="updateCart">Modifier le panier</button>
-
 @endsection

@@ -28,7 +28,7 @@
                         <a class="nav-link" href="{{route('catalog')}}">Catalogue</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('viewCart')}}">Panier</a>
+                        <a class="nav-link" href="{{route('indexCart')}}">Panier</a>
                         </ul>
                     </li>
                 </ul>
