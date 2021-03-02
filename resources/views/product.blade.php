@@ -1,4 +1,7 @@
-<body>
+@extends('base')
+@section('content')
+
+
     <h1> Je suis le produit : {{$product->title}}</h1>
     <article>
         {{$product->description}}
@@ -11,6 +14,6 @@
             <li class="list-group-item">{{$product->vat}}</li>
         </ul>
     </div>
-</body>
 
-</html>
+
+@endsection
