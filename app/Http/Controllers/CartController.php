@@ -112,15 +112,29 @@ class CartController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     *  Mise à jour du panier (modification des quantités, si quantité = 0 suppression de l'article du panier)
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $myCart = session('cart');
+        foreach ($myCart as $id => $qty)
+        {
+            // récupération des infos du formulaire par la requête
+            $formQty = $request->input('qty_'.$id);
+            if ($formQty == 0)
+            {
+                //supprimer produit panier, pas encore implémenté
+            } else
+            {
+                $myCart[$id] = $formQty;
+            }
+        }
+        session(['cart' => $myCart]);
+
+        return view('cart');
     }
 
     /**
