@@ -13,7 +13,7 @@
             <?php $product = \App\Models\Product::findorfail($id) ?>
 
             <h3>{{$product->title}}</h3>
-            <p>{{\App\Models\Product::calculatorVAT($id)}} €</p>
+            <p>{{$product->price_vat}} €</p>
             <p><input type="number" name="qty_{{$id}}" value="{{$quantity}}"></p>
             <button type="submit" name="deleteProductInCart">Supprimer le produit</button>
         </div>

@@ -1,10 +1,10 @@
 <?php
 
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\HomeController;
-use \App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +26,8 @@ Route::get('/catalog', [ProductController::class, 'index'])->name('catalog');
 
 // route vers l'affichage du catalogue par catégorie, URI = /catalog/{id}
 Route::get('/catalog/{categoryId}', [ProductController::class, 'indexByCategory'])->name('catalogByCategory');
+
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('addCart');
 
 // route vers l'affichage du panier, URI = /cart
 Route::view('/cart', 'cart')->name('viewCart');
