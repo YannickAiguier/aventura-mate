@@ -9,7 +9,8 @@
     <title>Aventura Maté</title>
 </head>
 <body>
-<header><nav class="navbar navbar-expand-lg navbar-light bg-light">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,19 +22,17 @@
                         <a class="nav-link active" aria-current="page" href="{{route('home')}}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('product',['id' => 1])}}">Produit</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{route('catalog')}}">Catalogue</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('viewCart')}}">Panier</a>
+                        <a class="nav-link" href="{{route('indexCart')}}">Panier</a>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-    </nav></header>
+    </nav>
+</header>
 @yield('content')
 <footer>Mon footer</footer>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>

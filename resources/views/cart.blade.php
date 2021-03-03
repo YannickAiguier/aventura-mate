@@ -4,11 +4,10 @@
 
 <h1>Mon panier</h1>
 <form action="{{route('updateCart')}}" method="POST">
-
+@csrf
 
 
     @foreach ($products as $product)
-    @csrf
         <div>
             <h3>{{$product[0]->title}}</h3>
             <p>{{\App\Models\Product::calculatorVAT($product[0]->id)}} €</p>
@@ -20,5 +19,4 @@
     @endforeach
 
     <button type="submit" name="updateCart">Modifier le panier</button>
-
 @endsection
