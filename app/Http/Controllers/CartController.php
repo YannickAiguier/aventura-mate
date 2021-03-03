@@ -55,7 +55,7 @@ class CartController extends Controller
 
         }
         session(['cart' => $tab]);
-        return view('viewCart');
+        return view('cart');
     }
 
     /**
@@ -134,7 +134,7 @@ class CartController extends Controller
         }
         session(['cart' => $myCart]);
 
-        return view('cart');
+        return redirect()->action([CartController::class, 'index']);
     }
 
     /**
