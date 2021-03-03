@@ -138,13 +138,14 @@ class CartController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * Suppression d'un produit du panier
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $myCart = session('cart');
+        unset($myCart[$id]);
+        session(['cart' => $myCart]);
+
+        return redirect()->action([CartController::class, 'index']);
     }
 }
