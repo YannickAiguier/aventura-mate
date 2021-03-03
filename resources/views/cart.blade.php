@@ -1,23 +1,22 @@
 @extends('base')
 @section('content')
 
-    <?php $productsInCart = session('cart') ?>
-
 
 <h1>Mon panier</h1>
 <form action="{{route('updateCart')}}" method="POST">
 
-    @foreach ($productsInCart as $id => $quantity)
+
+
+    @foreach ($products as $product)
     @csrf
         <div>
-            <?php $product = \App\Models\Product::findorfail($id) ?>
-
-            <h3>{{$product->title}}</h3>
-            <p>{{\App\Models\Product::calculatorVAT($id)}} €</p>
-            <p><input type="number" name="qty_{{$id}}" value="{{$quantity}}"></p>
+            <h3>{{$product[0]->title}}</h3>
+            <p>{{\App\Models\Product::calculatorVAT($product[0]->id)}} €</p>
+            <p><input type="number" name="qty_{{$product[0]->id}}" value="{{$product[1]}}"></p>
             <button type="submit" name="deleteProductInCart">Supprimer le produit</button>
         </div>
         <hr>
+
     @endforeach
 
     <button type="submit" name="updateCart">Modifier le panier</button>

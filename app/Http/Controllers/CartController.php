@@ -58,7 +58,17 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $cart = session('cart');
+        $products = [];
+        foreach ($cart as $id => $qty) {
+           $products[$id] = [
+               Product::findOrFail($id),
+               $qty
+           ];
+        }
+        return view('cart', [
+            'products' => $products
+        ]);
     }
 
     /**
