@@ -86,7 +86,7 @@ class CartController extends Controller
 
         }
         session(['cart' => $tab]);
-        return view('viewCart');
+        return view('cart');
     }
 
     /**
