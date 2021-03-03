@@ -3,20 +3,26 @@
 
 
 <h1>Mon panier</h1>
-<form action="{{route('updateCart')}}" method="POST">
-@csrf
+
 
 
     @foreach ($products as $product)
         <div>
             <h3>{{$product[0]->title}}</h3>
-            <p>{{\App\Models\Product::calculatorVAT($product[0]->id)}} €</p>
-            <p><input type="number" name="qty_{{$product[0]->id}}" value="{{$product[1]}}"></p>
-            <button type="submit" name="deleteProductInCart">Supprimer le produit</button>
+            <p>{{$product[0]->price_vat}} €</p>
+            <form action="{{route('lineUpdate',$product[0]->id)}}" method="POST">
+                @csrf
+                @method('PUT')
+                <p><input type="number" name="qty" value="{{$product[1]}}"></p>
+                <button type="submit" name="updateCart">Modifier le produit</button>
+            </form>
+            <form action="{{route('destroyCart',$product[0]->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" name="destroyCart">Supprimer le produit</button>
+            </form>
         </div>
         <hr>
 
     @endforeach
-
-    <button type="submit" name="updateCart">Modifier le panier</button>
 @endsection

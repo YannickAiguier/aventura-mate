@@ -137,6 +137,25 @@ class CartController extends Controller
 
         return redirect()->action([CartController::class, 'index']);
     }
+    public function lineUpdate($id, Request $request)
+    {
+        $myCart = session('cart');
+
+        // récupération des infos du formulaire par la requête
+        $formQty = $request->input('qty');
+        if ($formQty == 0)
+        {
+            //supprimer produit panier, pas encore implémenté
+        } else
+        {
+            $myCart[$id] = $formQty;
+        }
+
+        session(['cart' => $myCart]);
+
+        return redirect()->action([CartController::class, 'index']);
+    }
+
 
     /**
      * Suppression d'un produit du panier

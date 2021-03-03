@@ -36,5 +36,7 @@ Route::post('cart', [CartController::class, 'store'])->name('storeCart');
 // route vers la modification du panier, URI = /cart
 Route::put('/cart', [CartController::class, 'update'])->name('updateCart');
 
+Route::put('/cart/{id}', [CartController::class, 'lineUpdate'])->name('lineUpdate');
+
 // route vers la suppresion d'un produit du panier, URI = /cart
 Route::delete('cart/{id}', [CartController::class, 'destroy'])->name('destroyCart');
