@@ -134,7 +134,7 @@ class CartController extends Controller
         }
         session(['cart' => $myCart]);
 
-        return view('cart');
+        return redirect()->action([CartController::class, 'index']);
     }
 
     /**
