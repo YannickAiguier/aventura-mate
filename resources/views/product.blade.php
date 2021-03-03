@@ -12,7 +12,7 @@
             <li class="list-group-item">Poid : {{$product->weight}}</li>
             <li class="list-group-item">TVA : {{$product->vat}}</li>
         </ul>
-            <form method="post" action="{{route('addCart')}}" >
+            <form method="post" action="{{route('storeCart')}}" >
                 @csrf
                 <label for="nb">Nombre : </label>
                 <input type="number" id="nb" name="nb"

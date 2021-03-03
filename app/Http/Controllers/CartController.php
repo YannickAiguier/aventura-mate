@@ -41,21 +41,9 @@ class CartController extends Controller
      * ajoute au panier un produit (id) et sa quantité (nb)
      *
      */
-    public function addToCart(Request $request)
+    public function addToCart()
     {
-        $tab = session('cart');
-        $fid = $request->input('id');
-        $fnb = $request->input('nb');
 
-        if (empty($tab) || !array_key_exists($fid, $tab)) {
-            $tab[$fid] = $fnb;
-
-        } else {
-            $tab[$fid] += $fnb;
-
-        }
-        session(['cart' => $tab]);
-        return view('viewCart');
     }
 
     /**
@@ -86,7 +74,19 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tab = session('cart');
+        $fid = $request->input('id');
+        $fnb = $request->input('nb');
+
+        if (empty($tab) || !array_key_exists($fid, $tab)) {
+            $tab[$fid] = $fnb;
+
+        } else {
+            $tab[$fid] += $fnb;
+
+        }
+        session(['cart' => $tab]);
+        return view('viewCart');
     }
 
     /**
