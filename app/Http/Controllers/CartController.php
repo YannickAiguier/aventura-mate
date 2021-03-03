@@ -127,7 +127,7 @@ class CartController extends Controller
         if ($formQty == 0)
         {
             //supprimer produit panier, pas encore implémenté
-            return redirect()->action([CartController::class, 'destroy'],['id' => $id]);
+            unset($myCart[$id]);
         } else
         {
             $myCart[$id] = $formQty;
