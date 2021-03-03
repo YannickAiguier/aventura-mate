@@ -33,10 +33,8 @@ Route::get('/cart', [CartController::class, 'index'])->name('indexCart');
 // route vers l'ajout au panier, URI = /cart
 Route::post('cart', [CartController::class, 'store'])->name('storeCart');
 
-// route vers la modification du panier, URI = /cart
-Route::put('/cart', [CartController::class, 'update'])->name('updateCart');
-
-Route::put('/cart/{id}', [CartController::class, 'lineUpdate'])->name('lineUpdate');
+// route vers la modification d'un produit du panier, URI = /cart/{id}
+Route::put('/cart/{id}', [CartController::class, 'update'])->name('update');
 
 // route vers la suppresion d'un produit du panier, URI = /cart
 Route::delete('cart/{id}', [CartController::class, 'destroy'])->name('destroyCart');

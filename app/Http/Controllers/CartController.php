@@ -13,11 +13,11 @@ class CartController extends Controller
      */
     public static function initCart()
     {
-        /*if (!session()->has('cart'))
+        if (!session()->has('cart'))
         {
             session(['cart' => []]);
-        }*/
-        session()->get('cart', []);
+        }
+        /*session()->get('cart', []);*/
     }
 
     /**
@@ -118,26 +118,7 @@ class CartController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function update(Request $request)
-    {
-        $myCart = session('cart');
-        foreach ($myCart as $id => $qty)
-        {
-            // récupération des infos du formulaire par la requête
-            $formQty = $request->input('qty_'.$id);
-            if ($formQty == 0)
-            {
-                //supprimer produit panier, pas encore implémenté
-            } else
-            {
-                $myCart[$id] = $formQty;
-            }
-        }
-        session(['cart' => $myCart]);
-
-        return redirect()->action([CartController::class, 'index']);
-    }
-    public function lineUpdate($id, Request $request)
+    public function update($id, Request $request)
     {
         $myCart = session('cart');
 
@@ -146,6 +127,7 @@ class CartController extends Controller
         if ($formQty == 0)
         {
             //supprimer produit panier, pas encore implémenté
+            return redirect()->action([CartController::class, 'destroy'],['id' => $id]);
         } else
         {
             $myCart[$id] = $formQty;
