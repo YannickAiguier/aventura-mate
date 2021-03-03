@@ -38,22 +38,23 @@ class CartController extends Controller
     }
 
     /**
-     * ajoute au panier un produit (id) et sa quantité (nb)
-     *
-     */
-    public function addToCart()
-    {
-
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $cart = session('cart');
+        $products = [];
+        foreach ($cart as $id => $qty) {
+           $products[$id] = [
+               Product::findOrFail($id),
+               $qty
+           ];
+        }
+        return view('cart', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -86,7 +87,7 @@ class CartController extends Controller
 
         }
         session(['cart' => $tab]);
-        return view('viewCart');
+        return redirect()->action([CartController::class, 'index']);
     }
 
     /**
@@ -134,17 +135,18 @@ class CartController extends Controller
         }
         session(['cart' => $myCart]);
 
-        return view('cart');
+        return redirect()->action([CartController::class, 'index']);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * Suppression d'un produit du panier
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $myCart = session('cart');
+        unset($myCart[$id]);
+        session(['cart' => $myCart]);
+
+        return redirect()->action([CartController::class, 'index']);
     }
 }
