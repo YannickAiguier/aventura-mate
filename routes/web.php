@@ -27,8 +27,6 @@ Route::get('/catalog', [ProductController::class, 'index'])->name('catalog');
 // route vers l'affichage du catalogue par catégorie, URI = /catalog/{id}
 Route::get('/catalog/{categoryId}', [ProductController::class, 'indexByCategory'])->name('catalogByCategory');
 
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('addCart');
-
 // route vers l'affichage du panier, URI = /cart
 Route::get('/cart', [CartController::class, 'index'])->name('indexCart');
 
