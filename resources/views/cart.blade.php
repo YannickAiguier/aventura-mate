@@ -23,7 +23,19 @@
             </div>
             <hr>
         @endforeach
+        <p>{{$total[1]}} article(s) pour un total de {{$total[0]}} €</p>
+        @if($loggedIn)
+            <form action="{{route('validateCart')}}" method="POST">
+                @csrf
+                @method('POST')
+                <input type="submit" value="Commander">
+            </form>
+        @else
+            <form action="{{route('validateCart')}}" method="POST">
+                @csrf
+                @method('POST')
+                <input type="submit" value="Valider mon panier">
+            </form>
+        @endif
     @endif
-
-
 @endsection
