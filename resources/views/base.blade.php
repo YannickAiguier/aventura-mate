@@ -26,7 +26,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('indexCart')}}">Panier</a>
-                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('dashboard')}}">Compte</a>
                     </li>
                 </ul>
             </div>

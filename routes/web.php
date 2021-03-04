@@ -1,10 +1,10 @@
 <?php
 
-
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +38,9 @@ Route::put('/cart/{id}', [CartController::class, 'update'])->name('update');
 
 // route vers la suppresion d'un produit du panier, URI = /cart
 Route::delete('cart/{id}', [CartController::class, 'destroy'])->name('destroyCart');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
