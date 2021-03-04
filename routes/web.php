@@ -39,6 +39,9 @@ Route::put('/cart/{id}', [CartController::class, 'update'])->name('update');
 // route vers la suppresion d'un produit du panier, URI = /cart
 Route::delete('cart/{id}', [CartController::class, 'destroy'])->name('destroyCart');
 
+// route vers la création de commande seulement si authentifié
+Route::post('/order', [CartController::class, 'forValidation'])->middleware('auth')->name('validateCart');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

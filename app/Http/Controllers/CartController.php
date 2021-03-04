@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -31,7 +32,7 @@ class CartController extends Controller
         foreach (session('cart') as $id => $quantity) {
             $product = Product::findOrFail($id);
             $total += ($quantity * $product->price_vat);
-            $nbProducts += $nbProducts + $quantity;
+            $nbProducts += $quantity;
         }
 
         return [$total, $nbProducts];
@@ -52,9 +53,9 @@ class CartController extends Controller
                $qty
            ];
         }
-        return view('cart', [
-            'products' => $products
-        ]);
+        $total = $this->totalCart();
+        $loggedIn = Auth::check();
+        return view('cart', ['products' => $products, 'total' => $total, 'loggedIn' => $loggedIn]);
     }
 
     /**
