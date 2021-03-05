@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use DateInterval;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -35,7 +38,16 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newOrder = new Order;
+        $lastOrder = Order::latest()->first();
+        $newOrder->number = $lastOrder->number + 1;
+        $date = new DateTime('now');
+        $newOrder->creation_date = $date->format('Y-m-d');
+        $interval = new DateInterval('P5D');
+        $date->add($interval);
+        $newOrder->delivery_date = $date->format('Y-m-d');
+        $newOrder->users_id = Auth::id();
+        $newOrder->save();
     }
 
     /**
