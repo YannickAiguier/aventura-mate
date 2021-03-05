@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderHasProducts;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Void_;
 
 class OrderHasProductsController extends Controller
 {
@@ -33,9 +36,18 @@ class OrderHasProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public static function  store(int $orderId, int $productId, int $quantity)
     {
-        //
+        $product = Product::find($productId);
+        DB::table('order_has_products')->insert([
+            'orders_id' => $orderId,
+            'products_id' => $productId,
+            'quantity' => $quantity,
+            'price' => $product->price,
+            'title' => $product->title,
+            'weight' => $product->weight,
+            'vat' => $product->vat,
+        ]);
     }
 
     /**
