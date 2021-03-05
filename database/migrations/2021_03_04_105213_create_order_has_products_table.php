@@ -16,7 +16,7 @@ class CreateOrderHasProductsTable extends Migration
         Schema::create('order_has_products', function (Blueprint $table) {
             $table->integer('quantity')->nullable(false);
             $table->decimal('price', $precision = 10, $scale = 0)->nullable(false);
-            $table->string('title', 100)->nullable(false)->unique();
+            $table->string('title', 100)->nullable(false);
             $table->decimal('vat',  4,  2)->nullable(false);
             $table->integer('weight')->nullable(false);
             $table->unsignedBigInteger('products_id');

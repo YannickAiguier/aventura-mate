@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderHasProducts;
 use DateInterval;
 use DateTime;
 use Illuminate\Http\Request;
@@ -36,7 +37,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $newOrder = new Order;
         $lastOrder = Order::latest()->first();
@@ -48,6 +49,13 @@ class OrderController extends Controller
         $newOrder->delivery_date = $date->format('Y-m-d');
         $newOrder->users_id = Auth::id();
         $newOrder->save();
+        // appeler la fonction de creation dans OrderHasProductController
+        $lastOrder = Order::latest()->first();
+        foreach(session('cart') as $id => $quantity)
+        {
+            OrderHasProductsController::store($lastOrder->id, $id, $quantity);
+        }
+        return view('order', ['id' => $lastOrder->id]);
     }
 
     /**
